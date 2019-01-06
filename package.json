@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/lleellee0/crawlAndNotify#readme",
   "dependencies": {
-    "node-telegram-bot-api": "^0.30.0"
+    "telebot": "^1.2.6"
   }
 }
