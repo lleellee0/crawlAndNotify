@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/lleellee0/crawlAndNotify#readme",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.88.0",
     "telebot": "^1.2.6"
   }
 }

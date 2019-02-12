@@ -20,12 +20,61 @@ bot.on(['/start', '/hello'], (msg) => {
     return msg.reply.text(`어서오세요! 새로운 구독자를 추가했습니다.
     다음과 같은 명령어를 사용하실 수 있습니다.
     
-    /naver_webtoon : 네이버 웹툰 유료화 알림
-    /etc : 기타 등등`);
+    /exit 구독 취소
+    /info 봇 정보`);
+});
+
+// 구독 취소시
+bot.on(['/exit'], (msg) => {
+    config.subscriber_ids.delete(msg.from.id);
+    configUtils.saveConfig(config);
+    return msg.reply.text(`구독을 취소했습니다.
+    다시 구독하려면 /start 를 눌러주세요.`);
+});
+
+// 봇 정보 요청시
+bot.on(['/info'], (msg) => {
+    return msg.reply.text(`봇 정보입니다.
+    소스코드는 다음 주소로 가시면 확인하실 수 있습니다.
+    https://github.com/lleellee0/crawlAndNotify`);
 });
 
 setTimeout(() => {
-    config.subscriber_ids.forEach(v=>bot.sendMessage(v, `${v}에게 메시지 보냅니당~~`));
+    // 10초 후 진행할 작업을 넣어주세요.
+    // 모든 구독자에게 메시지 보내기 : config.subscriber_ids.forEach(v=>bot.sendMessage(v, `${v}에게 메시지 보냅니당~~`));
 }, 10000);
+
+const request = require('request');
+const cheerio = require('cheerio');
+
+let isFirstRequest = true;
+const linkArray = [];
+
+const requestNaverWebtoonNoti = () => {
+    request('https://comic.naver.com/notice/list.nhn?searchWord=%EC%9C%A0%EB%A3%8C%ED%99%94', (err, res, body) => {
+    if(err) throw err;
+    const $ = cheerio.load(body);
+    let targetElements = $('table.tbl_notice tr a');
+    for(let i = 0; i < targetElements.length; i++) {
+        if(isFirstRequest)
+            linkArray.push(targetElements[i].attribs.href);
+        else
+            if(linkArray[i] != targetElements[i].attribs.href) {  // 두번째 실행부터 비교를 했을 때 서로 다르다면 구독자에게 알려주기 + 배열 갱신
+                config.subscriber_ids.forEach(v=>bot.sendMessage(v, `새로운 글이 감지되었습니다.
+                https://comic.naver.com${targetElements[i].attribs.href}`));
+                linkArray[i] = targetElements[i].attribs.href;
+            }
+    }
+    if(isFirstRequest)  // 첫번째 실행이 종료되었음.
+        isFirstRequest = false;
+
+});
+}
+
+requestNaverWebtoonNoti();
+setInterval(() => {
+    // 하루에 한번마다 진행할 작업을 넣어주세요.
+   requestNaverWebtoonNoti(); 
+}, 1000 * 60 * 24);
 
 bot.start();
