@@ -75,6 +75,6 @@ requestNaverWebtoonNoti();
 setInterval(() => {
     // 하루에 한번마다 진행할 작업을 넣어주세요.
    requestNaverWebtoonNoti(); 
-}, 1000 * 60 * 24);
+}, 1000 * 60 * 60 * 24);
 
 bot.start();
