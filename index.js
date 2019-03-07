@@ -56,7 +56,7 @@ const requestNaverWebtoonNoti = () => {
     const $ = cheerio.load(body);
     let targetElement = $('table.tbl_notice tr a')[0];
     if(isFirstRequest)
-            linkArray.push(targetElement.attribs.href);
+            topLink.push(targetElement.attribs.href);
         else
             if(topLink != targetElement.attribs.href) {  // 두번째 실행부터 비교를 했을 때 서로 다르다면 구독자에게 알려주기 + topLink 갱신
                 config.subscriber_ids.forEach(v=>bot.sendMessage(v, `새로운 글이 감지되었습니다.
