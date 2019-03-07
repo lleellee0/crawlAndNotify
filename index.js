@@ -48,7 +48,7 @@ const request = require('request');
 const cheerio = require('cheerio');
 
 let isFirstRequest = true;
-const topLink = '';
+let topLink = '';
 
 const requestNaverWebtoonNoti = () => {
     request('https://comic.naver.com/notice/list.nhn?searchWord=%EC%9C%A0%EB%A3%8C%ED%99%94', (err, res, body) => {
