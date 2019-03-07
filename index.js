@@ -48,23 +48,21 @@ const request = require('request');
 const cheerio = require('cheerio');
 
 let isFirstRequest = true;
-const linkArray = [];
+const topLink = '';
 
 const requestNaverWebtoonNoti = () => {
     request('https://comic.naver.com/notice/list.nhn?searchWord=%EC%9C%A0%EB%A3%8C%ED%99%94', (err, res, body) => {
     if(err) throw err;
     const $ = cheerio.load(body);
-    let targetElements = $('table.tbl_notice tr a');
-    for(let i = 0; i < targetElements.length; i++) {
-        if(isFirstRequest)
-            linkArray.push(targetElements[i].attribs.href);
+    let targetElement = $('table.tbl_notice tr a')[0];
+    if(isFirstRequest)
+            linkArray.push(targetElement.attribs.href);
         else
-            if(linkArray[i] != targetElements[i].attribs.href) {  // 두번째 실행부터 비교를 했을 때 서로 다르다면 구독자에게 알려주기 + 배열 갱신
+            if(topLink != targetElement.attribs.href) {  // 두번째 실행부터 비교를 했을 때 서로 다르다면 구독자에게 알려주기 + topLink 갱신
                 config.subscriber_ids.forEach(v=>bot.sendMessage(v, `새로운 글이 감지되었습니다.
-                https://comic.naver.com${targetElements[i].attribs.href}`));
-                linkArray[i] = targetElements[i].attribs.href;
+                https://comic.naver.com${targetElement.attribs.href}`));
+                topLink = targetElement.attribs.href;
             }
-    }
     if(isFirstRequest)  // 첫번째 실행이 종료되었음.
         isFirstRequest = false;
 
@@ -75,6 +73,6 @@ requestNaverWebtoonNoti();
 setInterval(() => {
     // 하루에 한번마다 진행할 작업을 넣어주세요.
    requestNaverWebtoonNoti(); 
-}, 1000 * 60 * 24);
+}, 1000 * 60 * 60 * 24);
 
 bot.start();
