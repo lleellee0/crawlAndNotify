@@ -1,4 +1,5 @@
 const bot = require('./bot/bot.js').bot;
+const config = require('./conf/config.json');
 
 // 봇 정보 요청시
 bot.on(['/info'], (msg) => {

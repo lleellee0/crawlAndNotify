@@ -1,6 +1,7 @@
 // 네이버 웹툰 공지사항 알림에 대한 예제입니다.
 
 const bot = require('../bot/bot.js').bot;
+const config = require('../conf/config.json');
 
 // 봇 정보 요청시
 bot.on(['/info'], (msg) => {
