@@ -4,15 +4,21 @@ Add and subtract telegram channel subscribers. You can specify the actions that 
 
 ```
 git clone https://github.com/lleellee0/simple-telegram-notify.git
+
 Open conf/config.json And input your BOT ACCESS TOKEN
+
 In your_job_here.js, write in code what you want to do.
+
 node your_job_here.js  Type at terminal, you can run your bot.
 ```
 
 ```
 git clone https://github.com/lleellee0/simple-telegram-notify.git
+
 conf/config.json 파일을 열고 BOT ACCESS TOKEN을 입력하고 저장해주세요.
+
 your_job_here.js에 하고싶은 작업을 코드로 입력해주세요.
+
 node your_job_here.js  라고 터미널에서 입력하면 당신의 봇이 실행됩니다.
 ```
 
