@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 const saveConfig = (config) => {
     let subscriber_ids_arr = [];
@@ -6,7 +7,7 @@ const saveConfig = (config) => {
     config.subscriber_ids.forEach(v => subscriber_ids_arr.push(v));
     config.subscriber_ids = subscriber_ids_arr;
 
-    fs.writeFile('config.json', JSON.stringify(config), (err, data) => {
+    fs.writeFile(path.join('conf', 'config.json'), JSON.stringify(config), (err, data) => {
         if (err)
             throw err;
         config.subscriber_ids = subscriber_ids_set; // set 객체 원복
