@@ -24,6 +24,11 @@ bot.on([/yourcommand], (msg) => {
 }
 ```
 
+## 사용법 영상
+[![사용법 유튜브 영상](https://github.com/lleellee0/images/blob/master/a1234sfasdfadsf.jpg?raw=true)](https://www.youtube.com/watch?v=WnJSorEnJx0)
+
+
+
 
 
 ### ENG ver
