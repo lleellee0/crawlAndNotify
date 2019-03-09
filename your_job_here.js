@@ -13,6 +13,12 @@ bot.on(['/info'], (msg) => {
     `);
 });
 
+bot.on(['/YOUR COMMAND'], (msg) => {
+    return msg.reply.text(`
+    YOUR MESSAGE
+    `);
+});
+
 const your_function = () => {
     // TODO
 }
@@ -21,5 +27,3 @@ your_function();
 setInterval(() => {
    your_function(); 
 }, 1000 * 5);    // 5 seconds interval
-
-bot.start();

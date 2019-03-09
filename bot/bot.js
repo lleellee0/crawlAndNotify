@@ -34,6 +34,7 @@ bot.on(['/exit'], (msg) => {
     다시 구독하려면 /start 를 눌러주세요.`);
 });
 
+bot.start();
 module.exports = {
     bot: bot
 }
