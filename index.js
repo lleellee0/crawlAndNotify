@@ -39,11 +39,6 @@ bot.on(['/info'], (msg) => {
     https://github.com/lleellee0/crawlAndNotify`);
 });
 
-setTimeout(() => {
-    // 10초 후 진행할 작업을 넣어주세요.
-    // 모든 구독자에게 메시지 보내기 : config.subscriber_ids.forEach(v=>bot.sendMessage(v, `${v}에게 메시지 보냅니당~~`));
-}, 10000);
-
 const request = require('request');
 const cheerio = require('cheerio');
 
