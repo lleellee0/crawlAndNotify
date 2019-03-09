@@ -26,7 +26,8 @@ bot.on([/yourcommand], (msg) => {
 
 
 
--ENG-
+### ENG ver
+
 Add and subtract telegram channel subscribers. You can specify the actions that you want to repeat.
 
 ```
